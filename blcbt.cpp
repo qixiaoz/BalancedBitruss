@@ -66,7 +66,7 @@ struct Graph {
     vector<Graph> partitions; // butterfly-connected subgraphs
     
     
-    int currentBestBBSize;
+    unsigned currentBestBBSize;
     
     void addEdge(int uid, int vid, int sign) {
         if (eMap.find(make_pair(uid, vid)) != eMap.end()) {
@@ -448,10 +448,8 @@ struct Graph {
                 }
                 if (e.sign == eMap[twin].sign) {
                     bIndex[make_pair(u, w)].sWedges.erase(e.vid); 
-                    //bIndex[make_pair(u, w)].sWedges.erase(remove(bIndex[make_pair(u, w)].sWedges.begin(), bIndex[make_pair(u, w)].sWedges.end(), e.vid), bIndex[make_pair(u, w)].sWedges.end());
                 } else {
                     bIndex[make_pair(u, w)].dWedges.erase(e.vid); 
-                    //bIndex[make_pair(u, w)].dWedges.erase(remove(bIndex[make_pair(u, w)].dWedges.begin(), bIndex[make_pair(u, w)].dWedges.end(), e.vid), bIndex[make_pair(u, w)].dWedges.end());
                 }
                 if (bIndex[make_pair(u, w)].sWedges.empty() && bIndex[make_pair(u, w)].dWedges.empty()){
                     bIndex.erase(make_pair(u, w));
@@ -465,10 +463,8 @@ struct Graph {
                 }
                 if (e.sign == eMap[twin].sign) {
                     bIndex[make_pair(u, w)].sWedges.erase(e.uid); 
-                    //bIndex[make_pair(u, w)].sWedges.erase(remove(bIndex[make_pair(u, w)].sWedges.begin(), bIndex[make_pair(u, w)].sWedges.end(), e.uid), bIndex[make_pair(u, w)].sWedges.end());
                 } else {
                     bIndex[make_pair(u, w)].dWedges.erase(e.uid); 
-                    //bIndex[make_pair(u, w)].dWedges.erase(remove(bIndex[make_pair(u, w)].dWedges.begin(), bIndex[make_pair(u, w)].dWedges.end(), e.uid), bIndex[make_pair(u, w)].dWedges.end());
                 }
                 if (bIndex[make_pair(u, w)].sWedges.empty() && bIndex[make_pair(u, w)].dWedges.empty()){
                     bIndex.erase(make_pair(u, w));
@@ -536,8 +532,7 @@ struct Graph {
         candSet.erase(make_pair(e.uid, e.vid));
         vMap[e.uid].neighbours.erase(remove(vMap[e.uid].neighbours.begin(), vMap[e.uid].neighbours.end(), e.vid), vMap[e.uid].neighbours.end());
         vMap[e.vid].neighbours.erase(remove(vMap[e.vid].neighbours.begin(), vMap[e.vid].neighbours.end(), e.uid), vMap[e.vid].neighbours.end());
-        //vMap[e.uid].neighbours.erase(e.vid);
-        //vMap[e.vid].neighbours.erase(e.uid);
+
     }
 
     void recursiveRemoveEdge(queue<pair<int, int>> & eq) {
@@ -558,10 +553,8 @@ struct Graph {
                         }
                         if (e.sign == eMap[twin].sign) {
                             bIndex[make_pair(u, w)].sWedges.erase(e.vid);
-                            //bIndex[make_pair(u, w)].sWedges.erase(remove(bIndex[make_pair(u, w)].sWedges.begin(), bIndex[make_pair(u, w)].sWedges.end(), e.vid), bIndex[make_pair(u, w)].sWedges.end());
                         } else {
                             bIndex[make_pair(u, w)].dWedges.erase(e.vid);
-                            //bIndex[make_pair(u, w)].dWedges.erase(remove(bIndex[make_pair(u, w)].dWedges.begin(), bIndex[make_pair(u, w)].dWedges.end(), e.vid), bIndex[make_pair(u, w)].dWedges.end());
                         }
                         if (bIndex[make_pair(u, w)].sWedges.empty() && bIndex[make_pair(u, w)].dWedges.empty()){
                             bIndex.erase(make_pair(u, w));
@@ -575,10 +568,8 @@ struct Graph {
                         }
                         if (e.sign == eMap[twin].sign) {
                             bIndex[make_pair(u, w)].sWedges.erase(e.uid);
-                            //bIndex[make_pair(u, w)].sWedges.erase(remove(bIndex[make_pair(u, w)].sWedges.begin(), bIndex[make_pair(u, w)].sWedges.end(), e.uid), bIndex[make_pair(u, w)].sWedges.end());
                         } else {
                             bIndex[make_pair(u, w)].dWedges.erase(e.uid);
-                            //bIndex[make_pair(u, w)].dWedges.erase(remove(bIndex[make_pair(u, w)].dWedges.begin(), bIndex[make_pair(u, w)].dWedges.end(), e.uid), bIndex[make_pair(u, w)].dWedges.end());
                         }
                         if (bIndex[make_pair(u, w)].sWedges.empty() && bIndex[make_pair(u, w)].dWedges.empty()){
                             bIndex.erase(make_pair(u, w));
@@ -672,7 +663,7 @@ struct Graph {
         }
     }
 
-    void countFollowers(Edge & e, int min = INT_MAX) {
+    void countFollowers(Edge & e, unsigned min = INT_MAX) {
         unordered_map<pair<int, int>, pair<int, int>, boost::hash<pair<int, int>>> originalSupport; // Original balance / unbalance support
         unordered_set<pair<int, int>, boost::hash<pair<int, int>>> fSet; // set of followers
         unordered_set<pair<int, int>, boost::hash<pair<int, int>>> vfSet; // set of visited followers
@@ -859,20 +850,6 @@ struct Graph {
             }
         }
         recursiveRemoveEdge(to_delete); 
-        /*
-        auto i = to_delete.begin();
-        while (i != to_delete.end()) {
-            // eMap[ePair].balanceSupport < eMap[ePair].unbalanceSupport ||
-            pair<int, int> ePair = make_pair(i->first, i->second);
-            ++i;
-            if (eMap.find(ePair) != eMap.end()) {
-                queue<pair<int, int>> eq;
-                eq.push(ePair);
-                 
-            }
-            
-        }
-        */
     }
 
      void random() {
@@ -908,20 +885,7 @@ struct Graph {
                 }
             }
             pair<int, int> ePair = make_pair(tuid, tvid);
-            /*
-            for (auto bPair: eMap[ePair].blooms) {
-                cout << bIndex[bPair].sWedges.size() << "\t" << bIndex[bPair].dWedges.size() << endl;
-            }
-            */
             if (tuid != 0 && tvid != 0 && max_ubp > EPSILON) { // max_ubp > EPSILON
-                /*
-                cout << tuid << " " << tvid << endl;
-                cout << max_ubp << "\t" << eMap[ePair].balanceSupport << "\t" << eMap[ePair].unbalanceSupport <<  "\t" << eMap[ePair].blooms.size()<< endl;
-                cout << "Remaining edge size: " << eMap.size() << endl;
-                cout << "Balanced butterfly count: " << balance_count << endl;
-                cout << "Unbalanced butterfly count: " << unbalance_count << endl;
-                */
-                // cout << "(" << ePair.first << ", " << ePair.second << ") ";
                 queue<pair<int, int>> eq;
                 eq.push(ePair);
                 recursiveRemoveEdge(eq);
@@ -952,7 +916,6 @@ struct Graph {
                      eq.push(p);
                 }
                 
-                
             }
 
             if (ePair != make_pair(0, 0)) {
@@ -961,7 +924,6 @@ struct Graph {
                     eq.push(ePair);
                 }
                 recursiveRemoveEdge(eq);
-                int candCount = 0;
                 //cout << candSet.size() << endl;
             } else {
                 removing = false;
@@ -982,13 +944,6 @@ struct Graph {
     
     void exact() {
         if (partitions.size() > 1) {
-            /*
-            int partsum = 0;
-            for (Graph & H: partitions){
-                partsum += H.eMap.size();
-            } 
-            cout << "Sum of partition size: " << partsum << endl;
-            */
             for (Graph & H: partitions){
                 H.currentBestBBSize = 0;
                 H.exact();
@@ -1005,19 +960,6 @@ struct Graph {
         } else if (candSet.size() == fixedEID.size()) { // No more edge to delete
             return;
         }
-        /*
-        for (auto ep: candSet) {
-            cout << "(" << ep.first << ", " << ep.second << ")";
-            if (eMap[ep].fixed) {
-                cout << "fixed, ";
-            } else {
-                cout << ", ";
-            }
-        }
-        cout << endl;
-        */
-
-        //cout << candSet.size() << endl;
         double max_ubp = 0;
         pair<int, int> ePair = make_pair(0, 0);
         for (auto & p: candSet) {
