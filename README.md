@@ -12,14 +12,13 @@ E-MAIL: qzhongaf@cse.ust.hk
 argv[0] = ./blcbt
 
 argv[1] = datafile
-
-	*	each line in format (uid, vid, sign)
+	*   each line in format (uid, vid, sign)
     *   uid and vid are positive integers
     *   sign is either 1 or -1
 
 argv[2] = algorithm
 
-	*	countBL: baseline balanced butterfly counting algorithm.
+    *   countBL: baseline balanced butterfly counting algorithm.
     *   count: improved balanced butterfly counting algorithm.
     *   supportsGreedy: greedy heuristics by balanced supports ratio (GreedyS).
     *   followersGreedy: greedy heuristics by followers (GreedyF).
@@ -38,8 +37,8 @@ Examples:
 
 Run improved balanced butterfly counting algorithm
 
-	*	./blcbt datafile count
+	*   ./blcbt datafile count
 
 Run GreedyS algorithm with $k = 20$ and $\epsilon = 0.3$ 
 	
-	*	./blcbt datafile supportsGreedy 20 0.3
+	*   ./blcbt datafile supportsGreedy 20 0.3
