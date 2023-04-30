@@ -1,7 +1,9 @@
 # Maximum Balanced $(k, \epsilon)$-Bitruss Detection in Signed Bipartite Graph
 
 Author : Qixiao ZHONG
+
 Institution: Hong Kong University of Science and Technology
+
 E-MAIL: qzhongaf@cse.ust.hk
 
 # Usage
