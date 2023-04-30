@@ -25,12 +25,12 @@ argv[2] = algorithm
     *   followersGreedy: greedy heuristics by followers (GreedyF).
     *   exact: the exact algorithm.
 	
-argv[3] = k
+argv[3] = $k$
 
     *   not required for countBL or count
 
 	
-argv[4] = epsilon
+argv[4] = $\epsilon$
 
     *   not required for countBL or count
 	
