@@ -12,6 +12,7 @@ E-MAIL: qzhongaf@cse.ust.hk
 argv[0] = ./blcbt
 
 argv[1] = datafile
+
 	*   each line in format (uid, vid, sign)
     *   uid and vid are positive integers
     *   sign is either 1 or -1
