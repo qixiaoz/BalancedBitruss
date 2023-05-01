@@ -20,7 +20,7 @@ argv[1] = datafile
 argv[2] = algorithm
 
     *   countBL: baseline balanced butterfly counting algorithm.
-    *   count: improved balanced butterfly counting algorithm.
+    *   count: improved balanced butterfly counting algorithm (CountI).
     *   supportsGreedy: greedy heuristics by balanced supports ratio (GreedyS).
     *   followersGreedy: greedy heuristics by followers (GreedyF).
     *   exact: the exact algorithm.
