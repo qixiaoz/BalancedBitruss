@@ -23,6 +23,7 @@ argv[2] = algorithm
     *   count: improved balanced butterfly counting algorithm (CountI).
     *   supportsGreedy: greedy heuristics by balanced supports ratio (GreedyS).
     *   followersGreedy: greedy heuristics by followers (GreedyF).
+    *	random: random algorithm based on the greedy heuristic framework.
     *   exact: the exact algorithm.
 	
 argv[3] = $k$
